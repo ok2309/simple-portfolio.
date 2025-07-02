@@ -1,1 +1,66 @@
+name: Deploy Simple Portfolio to GitHub Pages
 
+on:
+  push:
+    branches:
+      - main # Trigger this workflow on pushes to the 'main' branch
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Run on the latest Ubuntu runner
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # Action to checkout your repository code
+
+    - name: Check for essential files (Task 4.1)
+      run: |
+        echo "Verifying essential project files..."
+        # Use 'test -f' to check if a file exists and is a regular file
+        test -f index.html || { echo "Error: index.html not found!"; exit 1; }
+        test -f style.css || { echo "Error: style.css not found!"; exit 1; }
+        test -f main.js || { echo "Error: main.js not found!"; exit 1; }
+        echo "All essential files are present: index.html, style.css, main.js."
+
+    - name: Basic HTML structure validation (Optional but good practice)
+      run: |
+        echo "Performing basic HTML structure check on index.html..."
+        # Check for fundamental HTML tags. This is a very basic check.
+        grep -q "<!DOCTYPE html>" index.html || { echo "Error: <!DOCTYPE html> declaration missing in index.html!"; exit 1; }
+        grep -q "<html" index.html || { echo "Error: <html> tag missing in index.html!"; exit 1; }
+        grep -q "<head>" index.html || { echo "Error: <head> tag missing in index.html!"; exit 1; }
+        grep -q "<body>" index.html || { echo "Error: <body> tag missing in index.html!"; exit 1; }
+        grep -q "</head>" index.html || { echo "Error: </head> tag missing in index.html!"; exit 1; }
+        grep -q "</body>" index.html || { echo "Error: </body> tag missing in index.html!"; exit 1; }
+        grep -q "</html>" index.html || { echo "Error: </html> tag missing in index.html!"; exit 1; }
+        echo "Basic HTML structure check passed for index.html."
+
+    - name: Verify CSS file not empty (Basic Test)
+      run: |
+        echo "Verifying style.css content..."
+        # Check if file exists and is not empty (-s)
+        test -s style.css || { echo "Error: style.css is empty or does not exist!"; exit 1; }
+        echo "style.css is not empty."
+
+    - name: Verify JavaScript file not empty (Basic Test)
+      run: |
+        echo "Verifying main.js content..."
+        # Check if file exists and is not empty (-s)
+        test -s main.js || { echo "Error: main.js is empty or does not exist!"; exit 1; }
+        echo "main.js is not empty."
+
+  deploy:
+    needs: build-and-test # This job depends on 'build-and-test' passing
+    runs-on: ubuntu-latest
+    if: success() # Only run deploy if the previous job (build-and-test) was successful
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to GitHub Pages (Task 4.2)
+      uses: peaceiris/actions-gh-pages@v4 # Use the GitHub Pages action
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }} # Automatically provided GitHub Token
+        publish_dir: ./ # The directory to publish (your project root)
+        cname: # Leave empty if not using a custom domain
