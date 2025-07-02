@@ -64,3 +64,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }} # Automatically provided GitHub Token
         publish_dir: ./ # The directory to publish (your project root)
         cname: # Leave empty if not using a custom domain
+        force_orphan: true
