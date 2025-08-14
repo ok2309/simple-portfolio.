@@ -60,6 +60,7 @@
             box-shadow: 0 0 5px rgba(92, 184, 92, 0.5);
         }
 
+        /* เพิ่ม CSS สำหรับแสดงกรอบสีแดงเมื่อข้อมูลไม่ถูกต้อง */
         input:invalid:not(:focus):not(:placeholder-shown),
         select:invalid:not(:focus):not(:placeholder-shown) {
             border-color: red;
@@ -116,10 +117,6 @@
             font-size: 0.9em;
             color: #777;
         }
-
-        #other-position-group {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -146,20 +143,13 @@
             <h3>ตำแหน่งงานที่สนใจและเงินเดือนที่ต้องการ</h3>
             <div class="form-group">
                 <label for="position">ตำแหน่งที่ต้องการสมัคร <span class="required">*</span></label>
-                <select id="position" name="position" onchange="showOtherPosition()" required>
+                <select id="position" name="position" required>
                     <option value="">กรุณาเลือกตำแหน่ง</option>
                     <option value="พนักงานขายหน้าร้าน">พนักงานขายหน้าร้าน</option>
                     <option value="นักออกแบบผลิตภัณฑ์">นักออกแบบผลิตภัณฑ์</option>
                     <option value="พนักงานฝ่ายผลิต">พนักงานฝ่ายผลิต</option>
-                    <option value="อื่นๆ">อื่นๆ (โปรดระบุ)</option>
                 </select>
             </div>
-
-            <div class="form-group" id="other-position-group">
-                <label for="other_position">โปรดระบุตำแหน่งที่ต้องการสมัคร <span class="required">*</span></label>
-                <input type="text" id="other_position" name="other_position">
-            </div>
-
             <div class="form-group">
                 <label for="expected_salary">เงินเดือนที่ต้องการ (บาท)</label>
                 <input type="number" id="expected_salary" name="expected_salary">
@@ -216,7 +206,7 @@
                 <input type="date" id="birth_date" name="birth_date">
             </div>
 
-            <h3>เอกสารแนบ (ไฟล์รูปภาพ หรือ PDF เท่านั้น ขนาดไม่เกิน 1 MB)</h3>
+            <h3>เอกสารแนบ (ไฟล์รูปภาพ หรือ PDF เท่านั้น ขนาดไม่เกิน 100 GB)</h3>
             <div class="form-group upload-section">
                 <label for="resume_file">อัปโหลดเรซูเม่/ประวัติส่วนตัว</label>
                 <label class="upload-button" for="resume_file">เลือกไฟล์</label>
@@ -237,31 +227,6 @@
                 fileNameDisplay.textContent = 'ยังไม่มีไฟล์ถูกเลือก';
             }
         }
-
-        function showOtherPosition() {
-            const positionSelect = document.getElementById('position');
-            const otherPositionGroup = document.getElementById('other-position-group');
-            const otherPositionInput = document.getElementById('other_position');
-
-            if (positionSelect.value === 'อื่นๆ') {
-                otherPositionGroup.style.display = 'block';
-                otherPositionInput.setAttribute('required', 'required');
-            } else {
-                otherPositionGroup.style.display = 'none';
-                otherPositionInput.removeAttribute('required');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const position = urlParams.get('position');
-            const positionSelect = document.getElementById('position');
-
-            if (position) {
-                positionSelect.value = position;
-            }
-            showOtherPosition();
-        });
     </script>
 </body>
 </html>
