@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ใบสมัครงาน - ร้านเฟอร์นิเจอร์</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS สำหรับหน้า Apply โดยเฉพาะ */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #5cb85c;
+            box-shadow: 0 0 5px rgba(92, 184, 92, 0.5);
+        }
+
+        input:invalid:not(:focus):not(:placeholder-shown),
+        select:invalid:not(:focus):not(:placeholder-shown) {
+            border-color: red;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+
+        button.submit-btn {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button.submit-btn:hover {
+            background-color: #4cae4c;
+        }
+
+        .upload-section {
+            border: 1px dashed #ccc;
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .upload-section label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .upload-section input {
+            display: none;
+        }
+
+        .upload-section .upload-button {
+            background-color: #f8f8f8;
+            color: #555;
+            border: 1px solid #ccc;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .upload-section .upload-button:hover {
+            background-color: #eee;
+        }
+
+        .selected-file {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        #other-position-group {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>ร้านเฟอร์นิเจอร์</h1>
+        </div>
+        <nav class="main-menu">
+            <ul>
+                <li><a href="index.html">หน้าแรก</a></li>
+                <li><a href="#">สินค้า</a></li>
+                <li><a href="#">โปรโมชั่น</a></li>
+                <li><a href="#">เกี่ยวกับเรา</a></li>
+                <li><a href="#">ติดต่อเรา</a></li>
+                <li><a href="careers.html">ร่วมงานกับเรา</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>ใบสมัครงาน</h2>
+        <form id="application-form" action="#" method="post">
+            <h3>ตำแหน่งงานที่สนใจและเงินเดือนที่ต้องการ</h3>
+            <div class="form-group">
+                <label for="position">ตำแหน่งที่ต้องการสมัคร <span class="required">*</span></label>
+                <select id="position" name="position" onchange="showOtherPosition()" required>
+                    <option value="">กรุณาเลือกตำแหน่ง</option>
+                    <option value="พนักงานขายหน้าร้าน">พนักงานขายหน้าร้าน</option>
+                    <option value="นักออกแบบผลิตภัณฑ์">นักออกแบบผลิตภัณฑ์</option>
+                    <option value="พนักงานฝ่ายผลิต">พนักงานฝ่ายผลิต</option>
+                    <option value="อื่นๆ">อื่นๆ (โปรดระบุ)</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="other-position-group">
+                <label for="other_position">โปรดระบุตำแหน่งที่ต้องการสมัคร <span class="required">*</span></label>
+                <input type="text" id="other_position" name="other_position">
+            </div>
+
+            <div class="form-group">
+                <label for="expected_salary">เงินเดือนที่ต้องการ (บาท)</label>
+                <input type="number" id="expected_salary" name="expected_salary">
+            </div>
+            <div class="form-group">
+                <label for="available_date">วันที่สามารถเริ่มงาน</label>
+                <input type="date" id="available_date" name="available_date">
+            </div>
+
+            <h3>ข้อมูลส่วนตัว</h3>
+            <div class="form-group">
+                <label for="prefix">คำนำหน้าชื่อ <span class="required">*</span></label>
+                <select id="prefix" name="prefix" required>
+                    <option value="">เลือก...</option>
+                    <option value="mr">นาย</option>
+                    <option value="ms">นางสาว</option>
+                    <option value="mrs">นาง</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="first_name_th">ชื่อ (ภาษาไทย) <span class="required">*</span></label>
+                <input type="text" id="first_name_th" name="first_name_th" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name_th">นามสกุล (ภาษาไทย) <span class="required">*</span></label>
+                <input type="text" id="last_name_th" name="last_name_th" required>
+            </div>
+            <div class="form-group">
+                <label for="first_name_en">ชื่อ (ภาษาอังกฤษ) <span class="required">*</span></label>
+                <input type="text" id="first_name_en" name="first_name_en" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name_en">นามสกุล (ภาษาอังกฤษ) <span class="required">*</span></label>
+                <input type="text" id="last_name_en" name="last_name_en" required>
+            </div>
+            <div class="form-group">
+                <label for="address">ที่อยู่ปัจจุบัน</label>
+                <textarea id="address" name="address" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="phone">เบอร์โทรศัพท์ <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="email">อีเมล <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="id_card">เลขที่บัตรประชาชน</label>
+                <input type="text" id="id_card" name="id_card">
+            </div>
+            <div class="form-group">
+                <label for="birth_date">วันเกิด</label>
+                <input type="date" id="birth_date" name="birth_date">
+            </div>
+
+            <h3>เอกสารแนบ (ไฟล์รูปภาพ หรือ PDF เท่านั้น ขนาดไม่เกิน 1 MB)</h3>
+            <div class="form-group upload-section">
+                <label for="resume_file">อัปโหลดเรซูเม่/ประวัติส่วนตัว</label>
+                <label class="upload-button" for="resume_file">เลือกไฟล์</label>
+                <input type="file" id="resume_file" name="resume_file" accept=".jpg,.jpeg,.png,.gif,.pdf" onchange="updateFileName(this)">
+                <span id="file_name" class="selected-file">ยังไม่มีไฟล์ถูกเลือก</span>
+            </div>
+
+            <button type="submit" class="submit-btn">ส่งใบสมัคร</button>
+        </form>
+    </div>
+
+    <script>
+        function updateFileName(input) {
+            const fileNameDisplay = document.getElementById('file_name');
+            if (input.files.length > 0) {
+                fileNameDisplay.textContent = input.files.item(0).name;
+            } else {
+                fileNameDisplay.textContent = 'ยังไม่มีไฟล์ถูกเลือก';
+            }
+        }
+
+        function showOtherPosition() {
+            const positionSelect = document.getElementById('position');
+            const otherPositionGroup = document.getElementById('other-position-group');
+            const otherPositionInput = document.getElementById('other_position');
+
+            if (positionSelect.value === 'อื่นๆ') {
+                otherPositionGroup.style.display = 'block';
+                otherPositionInput.setAttribute('required', 'required');
+            } else {
+                otherPositionGroup.style.display = 'none';
+                otherPositionInput.removeAttribute('required');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const position = urlParams.get('position');
+            const positionSelect = document.getElementById('position');
+
+            if (position) {
+                positionSelect.value = position;
+            }
+            showOtherPosition();
+        });
+    </script>
+</body>
+</html>
